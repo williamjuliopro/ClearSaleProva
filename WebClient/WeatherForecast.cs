@@ -1,6 +1,6 @@
 using System;
 
-namespace ClearSaleProva
+namespace WebClient
 {
     public class WeatherForecast
     {

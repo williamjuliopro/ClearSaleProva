@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClearSale", "ClearSaleProva\ClearSale.csproj", "{E0F01E8A-AF4E-4E76-B45E-7C72278CCBBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "ClearSaleProva\WebApi.csproj", "{E0F01E8A-AF4E-4E76-B45E-7C72278CCBBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

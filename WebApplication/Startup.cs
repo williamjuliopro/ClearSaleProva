@@ -1,36 +1,29 @@
-using WebApi.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-
-namespace WebApi
+namespace WebApplication
 {
     public class Startup
     {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
         public IConfiguration Configuration { get; }
 
-        public Startup(IConfiguration _configuration)
-        {
-            Configuration = _configuration;
-        }
-
-      
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {            
-            services.AddMvc();
-
-
-            var connection = Configuration.GetConnectionString("DefaultConnection");            
-            IServiceCollection serviceCollections = services.AddDbContext<DatabaseContext>(options => options.UseSqlite(connection));
-
-            services.AddControllers();
+        {
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,17 +33,15 @@ namespace WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseCors(config =>{
-                config.AllowAnyHeader();
-                config.AllowAnyMethod();
-                config.AllowAnyOrigin();
-
-            });
-
-            app.UseStaticFiles();
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -58,7 +49,7 @@ namespace WebApi
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
         }
     }
